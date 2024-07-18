@@ -1,0 +1,17 @@
+def two_sum(l, s):
+    d = {}
+    for i in range(len(l)):
+        if s - l[i] not in d:
+            d[l[i]] = i
+        else:
+            return [d[s-l[i]], i]
+    return "Not present"
+    
+l = [3, 6, 14, 2]
+print(two_sum(l, 8))
+
+l = [3, 6, 14, 2]
+print(two_sum(l, 9))
+
+l = [3, 6, 14, 2]
+print(two_sum(l, 10))
