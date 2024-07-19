@@ -1,0 +1,62 @@
+def lengthOfLongestSubstring(s):
+    
+    # If the length is less than or equal to 1
+    if len(s) in [0, 1]:
+        # Return the string itself
+        return len(s)
+        
+    # Integer to store current length of unrepeated substring
+    curr_length = 0
+    # Array to store characters of current substring
+    char_present = []
+    # Array to store all lengths of unique characters
+    all_lengths = []
+    # String to store the biggest substring
+    cp = ""
+    # List to store all substrings with non-repeated characters
+    all_strings = []
+    
+    # Iterate through each character in the string
+    for i in range(len(s)):
+        
+        if s[i] not in char_present:
+            # Add the character to char_present
+            char_present.append(s[i])
+            # Update the substring 
+            cp += s[i]
+            # Incremenr the length of the counter by 1
+            curr_length += 1
+            
+            #all_strings.append(cp)
+        else:
+            # Add the length of the current substring to all_lengths
+            all_lengths.append(curr_length)
+            
+            all_strings.append(cp)
+            # Find the index of the repeated character
+            ind = char_present.index(s[i])
+            # Update the char_present list to contain all characters from after the repeated character
+            char_present = char_present[ind+1::]
+            # Update the substring in the same way
+            cp = cp[ind+1::]
+            # Add the character to char_present
+            char_present.append(s[i])
+            # Add the character to the substring
+            cp += s[i]
+            # Update the length of curr_length to be the length of char_present
+            curr_length = len(char_present)
+            
+    # Add the current_length value to all_lkengths
+    all_lengths.append(curr_length)
+    # Add the substring to the 
+    all_strings.append(cp)
+
+    return max(all_lengths), max(all_strings, key=len)
+    
+s1 = "abcabcbb"
+s2 = "bbbbb"
+s3 = "pwwkew"
+
+print(lengthOfLongestSubstring(s1))
+print(lengthOfLongestSubstring(s2))
+print(lengthOfLongestSubstring(s3))
